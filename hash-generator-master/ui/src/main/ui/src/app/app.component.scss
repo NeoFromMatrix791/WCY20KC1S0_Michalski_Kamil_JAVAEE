@@ -1,0 +1,74 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+
+    &>div {
+        width: 33.33%;
+
+        &:nth-of-type(2) {
+            text-align: center;
+        }
+
+        &:nth-of-type(3) {
+            text-align: right;
+        }
+    }
+}
+
+.container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 50px auto;
+}
+
+.form-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.result-wrapper {
+    margin-left: 12px;
+
+    .row {
+        display: flex;
+        flex-direction: row;
+
+        .label {
+            width: 70px;
+            color: #a8a8a8;
+            font-weight: 600;
+        }
+
+        .value {
+            white-space: normal;
+            word-wrap: break-word;
+            max-width: 88%;
+        }
+    }
+}
+
+.form mat-form-field {
+    width: 300px;
+}
+
+.actions {
+    button {
+        margin-left: 12px;
+    }
+}
+
+table {
+    width: 100%;
+
+    td,
+    th {
+        padding: 8px 12px;
+        white-space: normal;
+        word-wrap: break-word;
+        max-width: 200px;
+    }
+}

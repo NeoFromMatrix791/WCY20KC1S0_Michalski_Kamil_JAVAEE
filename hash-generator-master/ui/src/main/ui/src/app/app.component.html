@@ -1,0 +1,89 @@
+<mat-toolbar>
+  <div class="header">
+    <div>Kamil Michalski - TJEE Hash Generator</div>
+    <div>Project No 15</div>
+    <div>v1.0.0</div>
+  </div>
+</mat-toolbar>
+
+<div class="container form">
+  <mat-card>
+    <mat-card-content>
+      <div class="form-wrapper">
+        <div class="form-inner-wrapper">
+          <form [formGroup]="form">
+            <mat-form-field appearance="outline">
+              <mat-label>Input value</mat-label>
+              <input matInput [formControl]="hashFC" required="true">
+              <mat-hint>Should be not empty or blank</mat-hint>
+              <mat-error>
+                <span *ngIf="hashFC.errors?.['required']">Required field</span>
+              </mat-error>
+            </mat-form-field>
+          </form>
+
+          <div class="actions">
+            <mat-checkbox color="primary" [formControl]="saveFC" [disabled]="hashFC.invalid">Save data in
+              Database</mat-checkbox>
+            <button mat-stroked-button color="primary" [disabled]="hashFC.invalid"
+              (click)="generateHash()">Generate</button>
+          </div>
+        </div>
+        <div *ngIf="result" class="result-wrapper">
+          <div>Generated MD6 Hash</div>
+          <div class="row">
+            <div class="label">128 bits</div>
+            <div class="value">{{result.hash128}}</div>
+          </div>
+          <div class="row">
+            <div class="label">256 bits</div>
+            <div class="value">{{result.hash256}}</div>
+          </div>
+          <div class="row">
+            <div class="label">512 bits</div>
+            <div class="value">{{result.hash512}}</div>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div class="container table">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="hash128">
+      <th mat-header-cell *matHeaderCellDef>128 bits</th>
+      <td mat-cell *matCellDef="let element"> {{element.hash128}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="hash256">
+      <th mat-header-cell *matHeaderCellDef>256 bits</th>
+      <td mat-cell *matCellDef="let element"> {{element.hash256}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="hash512">
+      <th mat-header-cell *matHeaderCellDef>512 bits</th>
+      <td mat-cell *matCellDef="let element"> {{element.hash512}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="created">
+      <th mat-header-cell *matHeaderCellDef>Created</th>
+      <td mat-cell *matCellDef="let element"> {{element.created}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-stroked-button color="primary" (click)="removeHash(element)">Remove</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="10" showFirstLastButtons
+    aria-label="Select page of periodic elements">
+  </mat-paginator>
+</div>
